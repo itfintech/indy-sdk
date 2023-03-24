@@ -189,7 +189,7 @@ impl From<postgres::error::Error> for WalletStorageError {
            err.code() == Some(&postgres::error::INTEGRITY_CONSTRAINT_VIOLATION) {
             WalletStorageError::ItemAlreadyExists
         } else {
-            WalletStorageError::IOError(format!("IO error during storage operation: {0} \n {1}", err.description(), err.source().unwrap()))
+            WalletStorageError::IOError(format!("IO error during storage operation: {}", err.to_string()))
         }
     }
 }
