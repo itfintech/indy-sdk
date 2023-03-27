@@ -10,7 +10,7 @@ use ::std::sync::RwLock;
 use postgres;
 use self::r2d2_postgres::{TlsMode, PostgresConnectionManager};
 use self::postgres_openssl::{OpenSsl};
-use self::postgres_openssl::openssl::ssl::{SslMethod, SslConnector} ;
+use self::postgres_openssl::openssl::ssl::{SslMethod, SslConnector, SslVerifyMode} ;
 use postgres_storage::postgres_openssl::openssl::ssl::SslConnectorBuilder;
 
 use serde_json;
