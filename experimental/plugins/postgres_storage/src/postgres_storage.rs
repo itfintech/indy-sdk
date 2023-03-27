@@ -407,6 +407,8 @@ impl PostgresConfig {
         if self.tls_ca.is_some() {
             builder.set_ca_file(self.tls_ca.as_ref().unwrap());
         }
+        
+        builder.set_verify(SslVerifyMode::NONE);
 
         debug!("initializing postgresql negotiator");
         self.negotiator = Some(OpenSsl::from(builder.build()));
@@ -432,6 +434,8 @@ impl PostgresConfig {
         if self.tls_ca.is_some() {
             builder.set_ca_file(self.tls_ca.as_ref().unwrap());
         }
+        
+        builder.set_verify(SslVerifyMode::NONE);
 
         let negotiator = OpenSsl::from(builder.build());
 
