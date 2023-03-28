@@ -884,18 +884,9 @@ impl WalletStrategy for MultiWalletSingleTableStrategy {
         debug!("creating wallets DB");
         let create_db_sql: String = str::replace(_CREATE_WALLET_DATABASE, "$1", wallet_db_name);
         debug!("create_db_sql: {:?}", create_db_sql);
-        if let Err(error) = conn.execute(&create_db_sql, &[]) {
-            if error.code() != Some(&postgres::error::DUPLICATE_DATABASE) {
-                debug!("error creating database, Error: {}", error);
-                conn.finish()?;
-                return Err(WalletStorageError::IOError(format!("Error occurred while creating the database: {}", error)));
-            } else {
-                // if database already exists, assume tables are created already and return
-                debug!("database already exists");
-                conn.finish()?;
-                return Ok(());
-            }
-        }
+
+        let error = conn.execute(&create_db_sql, &[]);
+
         conn.finish()?;
 
         debug!("connecting to wallet storage");
