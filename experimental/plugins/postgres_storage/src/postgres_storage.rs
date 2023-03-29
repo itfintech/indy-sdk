@@ -1092,7 +1092,7 @@ impl PostgresStorageType {
         url_base.push_str("@");
         url_base.push_str(&config.url[..]);
         url_base.push_str("/");
-        url_base.push_str("postgres");
+        url_base.push_str(_POSTGRES_DB);
         url_base
     }
 
